@@ -1,15 +1,95 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:julius/models/category_model.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  List<CategoryModel> categories = [];
+
+  void _getCategories() {
+    categories = CategoryModel.getCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _getCategories();
+
     return Scaffold(
       appBar: appBar(),
       backgroundColor: Colors.white,
-      body: Column(children: [_searchField()]),
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _searchField(),
+        const SizedBox(
+          height: 40,
+        ),
+        _categorySection()
+      ]),
+    );
+  }
+
+  Column _categorySection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Text(
+            'Category',
+            style: TextStyle(
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        SizedBox(
+          height: 150,
+          child: ListView.separated(
+            separatorBuilder: (context, index) => const SizedBox(
+              width: 20,
+            ),
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              return Container(
+                width: 100,
+                decoration: BoxDecoration(
+                  color: categories[index].boxColor.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SvgPicture.asset(
+                              categories[index].iconPath,
+                            ),
+                          ),
+                        ),
+                        Text(categories[index].name,
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400)),
+                      ]),
+                ),
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 
