@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Food"
+    },
+    {
+      "id": 2,
+      "name": "Medicine"
+    },
+    {
+      "id": 3,
+      "name": "Hygiene"
+    },
+    {
+      "id": 4,
+      "name": "Leisure"
+    },
+    {
+      "id": 5,
+      "name": "Transportation"
+    },
+    {
+      "id": 6,
+      "name": "Education"
+    },
+    {
+      "id": 7,
+      "name": "Utilities"
+    },
+    {
+      "id": 8,
+      "name": "Shopping"
+    },
+    {
+      "id": 9,
+      "name": "Health"
+    },
+    {
+      "id": 10,
+      "name": "Other"
+    }
+  ]
+} 
